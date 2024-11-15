@@ -6,14 +6,17 @@
     margin-right: -68px;
 }
 
-.nav {
+.Nav{
     width: 250px;
     background-color: #fff;
     color: black;
-    position: fixed;
+    //position: fixed;
     height: 100vh;
     left: 0;
     top: 0;
+    padding: 20px;
+    box-sizing: border-box;  /* Đảm bảo padding không làm tăng chiều rộng */
+    z-index: 100;
 }
 
 .routes-container {

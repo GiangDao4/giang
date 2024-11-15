@@ -6,29 +6,17 @@ import 'react-toastify/dist/ReactToastify.css';
 import './login.scss';
 
 const Login = () => {
-    const [email, setEmail] = useState('');  // State lưu email người dùng
+    const [phone_number, setPhoneNumber] = useState('');  // State lưu số điện thoại người dùng
     const [password, setPassword] = useState('');  // State lưu mật khẩu người dùng
     const [loading, setLoading] = useState(false);  // State kiểm tra trạng thái đang gửi yêu cầu
     const navigate = useNavigate();  // Hook để điều hướng người dùng
-
-    // Tài khoản mặc định (mock account)
-    const defaultAccount = {
-        email: 'default@example.com',
-        password: 'default1234',
-        token: 'mockToken1234567890',
-        user: {
-            id: 1,
-            username: 'user_default',
-            email: 'default@example.com',
-        }
-    };
 
     // Hàm xử lý khi người dùng submit form
     const handleLogin = async (e) => {
         e.preventDefault();  // Ngừng việc reload trang khi submit
 
         // Kiểm tra dữ liệu nhập vào
-        if (!email || !password) {
+        if (!phone_number || !password) {
             toast.error("Vui lòng điền đầy đủ thông tin");
             return;
         }
@@ -37,37 +25,33 @@ const Login = () => {
 
         try {
             // Gửi yêu cầu đăng nhập (thay đổi API url theo backend của bạn)
-            const response = await axios.post('https://example.com/api/login', {
-                email,
+            const response = await axios.post('http://localhost:8088/api/v1/users/login', {
+                phone_number,
                 password,
             });
 
             // Kiểm tra nếu đăng nhập thành công
-            if (response.data.success) {
-                // Lưu thông tin người dùng và token vào localStorage
-                localStorage.setItem('authToken', response.data.token);
-                localStorage.setItem('user', JSON.stringify(response.data.user));
+            console.log('Response:', response);
 
+            if (response.data.message === "Login Success" && response.data.token) {
+                // Lưu thông tin token vào localStorage
+                localStorage.setItem('authToken', response.data.token);
+                console.log('Token đã lưu:', localStorage.getItem('authToken'));
+                // Optionally, lưu thông tin người dùng nếu có trong response
+                localStorage.setItem('user', JSON.stringify(response.data.user));
+                //  localStorage.setItem('authToken', response.data.token);
+                // localStorage.setItem('isAuthenticated', true);
+                navigate('/admin')
                 toast.success("Đăng nhập thành công!");
 
                 // Điều hướng người dùng tới trang quản trị hoặc trang chủ
-                navigate('/admin');  // Chuyển hướng tới trang dashboard (quản trị)
+                // navigate('/admin');  // Chuyển hướng tới trang dashboard (quản trị)
             } else {
                 toast.error("Thông tin đăng nhập không chính xác!");
             }
         } catch (error) {
-            // Nếu API có lỗi, sử dụng tài khoản mặc định
             console.error("Đăng nhập thất bại:", error);
-            toast.error("Đã có lỗi xảy ra, sử dụng tài khoản mặc định.");
-
-            // Giả lập thông tin đăng nhập thành công với tài khoản mặc định
-            localStorage.setItem('authToken', defaultAccount.token);
-            localStorage.setItem('user', JSON.stringify(defaultAccount.user));
-
-            toast.success("Đăng nhập thành công với tài khoản mặc định!");
-
-            // Điều hướng người dùng tới trang quản trị (dashboard)
-            navigate('/admin');
+            toast.error("Đã có lỗi xảy ra, vui lòng thử lại.");
         } finally {
             setLoading(false);  // Kết thúc việc xử lý đăng nhập
         }
@@ -75,16 +59,16 @@ const Login = () => {
 
     return (
         <div className="login-container">
-            <h2>Đăng Nhập</h2>
+            <h2 className="login-title">Đăng Nhập</h2>
 
             <form onSubmit={handleLogin} className="login-form">
                 <div className="form-group">
-                    <label>Email</label>
+                    <label>Số điện thoại</label>
                     <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Nhập email"
+                        type="text"  // Sử dụng type="text" cho phone_number
+                        value={phone_number}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        placeholder="Nhập số điện thoại"
                         required
                     />
                 </div>
@@ -100,14 +84,16 @@ const Login = () => {
                     />
                 </div>
 
-                <button type="submit" disabled={loading}>
+                <button type="submit" className="login-button" disabled={loading}>
                     {loading ? "Đang đăng nhập..." : "Đăng nhập"}
                 </button>
             </form>
 
-            <p className="signup-link">
-                Chưa có tài khoản? <a href="/reister">Đăng ký ngay</a>
-            </p>
+            <div className="login-footer">
+                <p className="forgot-password">
+                    <a href="/forgot-password">Quên mật khẩu?</a>
+                </p>
+            </div>
         </div>
     );
 };

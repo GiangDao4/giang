@@ -8,11 +8,11 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 const CarStatistics = () => {
     // Dữ liệu giả định về số lượt xem các xe trong tuần
     const [carViews, setCarViews] = useState([
-        { name: 'Car A', views: 20 },
-        { name: 'Car B', views: 35 },
-        { name: 'Car C', views: 45 },
-        { name: 'Car D', views: 60 },
-        { name: 'Car E', views: 55 },
+        { name: 'VinFast VF 8 plus', views: 20 },
+        { name: 'VinFast VF 8s', views: 35 },
+        { name: 'VinFast VF 9 - Eco', views: 45 },
+        { name: 'Toyota Wigo - E', views: 60 },
+        { name: 'Lexus ES - 250', views: 55 },
     ]);
 
     // Dữ liệu biểu đồ về số lượt xem xe theo ngày trong tuần

@@ -13,59 +13,69 @@ const ListUser = () => {
     const navigate = useNavigate();  // Hook điều hướng
 
     // Hàm fetch dữ liệu người dùng từ API với phân trang
-    const fetchUsers = async (page) => {
+    const fetchUsers = async () => {
         try {
-            const res = await axios.get(`https://reqres.in/api/users?page=${page}`);
-            const users = res.data && res.data.data ? res.data.data : [];
-            const total = res.data.total / usersPerPage;
+            debugger;
+            const token = localStorage.getItem('authToken'); // Hoặc từ nơi nào bạn lưu token
 
+            const res = await axios.get('http://localhost:8088/api/v1/users/getAllUsers', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                }
+            });
 
+            // Lấy dữ liệu người dùng từ API
+            const users = res.data;
 
-            // Tính tổng số trang
+            // Cập nhật state với danh sách người dùng
             setListUser(users);
-            setTotalPages(Math.ceil(total));  // Lưu số trang (làm tròn lên)
         } catch (error) {
             console.error("Error fetching users:", error);
+            toast.error("Không thể lấy danh sách người dùng!");
         }
     };
-
     useEffect(() => {
         fetchUsers(currentPage);  // Gọi hàm khi component mount hoặc khi `currentPage` thay đổi
     }, [currentPage]);
 
-    // Hàm điều hướng đến trang chi tiết người dùng
-    const handleViewDetailUser = (userId) => {
-        navigate(`/user/${userId}`);  // Điều hướng tới trang chi tiết người dùng với ID
-    };
-
-    // Giả lập trạng thái người dùng (có thể từ API hoặc một số điều kiện khác)
-    useEffect(() => {
-        const randomStatus = Math.random() > 0.5 ? 'online' : 'offline';
-        setStatus(randomStatus);
-    }, []);
-
-    // Hàm xóa người dùng
-    // const handleDeleteUser = (userId) => {
-    //     setListUser(ListUser.filter(user => user.id !== userId));
-    //     toast.success("Xóa người dùng thành công!");
-    // };
-    const handleDeleteUser = async (userId) => {
+    const handleDeleteUser = async (phoneNumber) => {
         try {
+            // Lấy token từ localStorage
 
-            await axios.delete(`https://reqres.in/api/users/${userId}`);
+            debugger;
 
-            // Sau khi xóa thành công, cập nhật lại danh sách người dùng
-            setListUser(prevList => prevList.filter(user => user.id !== userId));
+            // Gửi yêu cầu xóa xe đến backend, kèm theo token trong header
+            const token = localStorage.getItem('authToken'); // Token thực tế
+            if (!token) {
+                toast.error("Token không hợp lệ hoặc không tồn tại!");
+                return;
+            }
+            await axios.delete('http://localhost:8088/api/v1/users/delete', {
+                headers: {
+                    'Authorization': `Bearer ${token}`, // Xác thực
+                    'Content-Type': 'application/json', // Định dạng dữ liệu gửi
+                    'Accept': 'application/json' // Định dạng dữ liệu nhận
+                },
+                params: { phoneNumber } // Thêm tham số query string
+            });
+            console.log({
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            });
 
 
-            toast.success("Xóa người dùng thành công!");
-            //fetchUsers(currentPage);
+            setListUser(prevList => prevList.filter(user => user.phoneNumber !== phoneNumber)); // Lọc lại danh sách để loại bỏ xe đã xóa
+
+            toast.success("Xóa người dùng thành công!"); // Hiển thị thông báo thành công
+            fetchUsers(currentPage); // Gọi lại API để lấy danh sách người dùng mới sau khi xóa
         } catch (error) {
-            // Nếu có lỗi xảy ra (ví dụ API không cho phép xóa), thông báo lỗi
+            // Nếu có lỗi xảy ra (ví dụ: API không cho phép xóa)
             toast.error("Không thể xóa người dùng!");
-            console.error("Error deleting user:", error);
+            console.error("Error deleting car:", error);
         }
     };
+
     // Hàm chuyển trang
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -127,19 +137,20 @@ const ListUser = () => {
                         return (
                             <div className="child" key={item.id}>
                                 <div className="user-info">
-                                    <span>{userIndex}. {item.email}</span>
+                                    <span>{index + 1}. {item.fullname} - {item.phoneNumber}</span>
                                     <span className={`status ${status}`}>{status}</span>
+
                                 </div>
 
                                 <div className="list-ud">
-                                    <div>
+                                    {/* <div>
                                         <button type="button" onClick={() => handleViewDetailUser(item.id)}>
                                             Sửa
                                         </button>
-                                    </div>
+                                    </div> */}
 
                                     <div>
-                                        <button type="button" onClick={() => handleDeleteUser(item.id)}>
+                                        <button type="button" onClick={() => handleDeleteUser(item.phone_number)}>
                                             Xóa
                                         </button>
                                     </div>

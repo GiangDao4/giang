@@ -1,44 +1,53 @@
 import './App.scss';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import Login from './login/login';
 import AdminDashboard from './admin';
-import Register from './login/Resister';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-
-} from "react-router-dom";
-
-
-
+//import Register from './login/Resister';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Home from './Example/Home';
+import ListUser from './User/ListUser';
+import DetailUser from './User/DetailUser';
+import ListCar from './Todos/ListCar';
+import Document from './Documents/Document';
+import CarList from './heater/carlist';
+import CarDetail from './Todos/cardetails';
 
 function App() {
-  const isAuthenticated = localStorage.getItem('isAuthenticated');
-  // const App= ()
-  /* 2 components: class componet/ fuction compoet(function, arrow)
-*  
-* 2 
-*/
-
+  // Kiểm tra xem người dùng đã đăng nhập hay chưa
+  // const isAuthenticated = localStorage.getItem('isAuthenticated');
+  // console.log("isAuthenticated:", isAuthenticated);
   return (
     <BrowserRouter>
       <div className="App">
         <header className="App-header">
-
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
           <Routes>
-            <Route path="/" element={<Navigate to="/*" />} />
-            <Route path="/*" element={<AdminDashboard />} />
+
+            {/* Route mặc định chuyển đến trang login */}
+            <Route path="/" element={<Navigate to="/login" />} />
+            <Route path="/cardetail/:id" element={<CarDetail />} />
+
+            {/* Bỏ qua kiểm tra xác thực, luôn chuyển đến trang AdminDashboard */}
+            <Route path="/admin" element={<AdminDashboard />}>
+              {/* Các route con của /admin */}
+              <Route path="a" element={<Home />} />
+              <Route path="user" element={<ListUser />} />
+              <Route path="user/:userId" element={<DetailUser />} />
+              <Route path="Todos" element={<ListCar />} />
+              <Route path="document" element={<Document />} />
+              <Route path="carlist" element={<CarList />} />
+
+
+            </Route>
+
+            {/* Luôn chuyển đến /admin khi vào /login, bỏ qua kiểm tra xác thực */}
             <Route path="/login" element={<Login />} />
-            <Route path='/reister' element={<Register />} />
+
+
 
           </Routes>
-
-
-
         </header>
+
+        {/* Toast container để hiển thị thông báo */}
         <ToastContainer
           position="top-right"
           autoClose={5000}
@@ -49,11 +58,10 @@ function App() {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-
         />
-
       </div>
     </BrowserRouter>
   );
 }
+
 export default App;
