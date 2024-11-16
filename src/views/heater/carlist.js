@@ -38,8 +38,6 @@ const CarList = () => {
             <div className="header">
                 <h2>Kết quả tìm kiếm: "{searchQuery}"</h2>
                 <div></div>
-                <p>Trang: {currentPage + 1}</p>
-                <p>Số lượng kết quả: {currentLimit}</p>
             </div>
 
             <div className="car-list">

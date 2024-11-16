@@ -9,7 +9,7 @@ import Nav from './nav/Nav';
 import Header from './heater/heater';
 import './admin-dashboard.scss';
 import CarList from './heater/carlist';
-import CarDetail from './Todos/cardetails';
+//import CarDetail from './Todos/cardetails';
 
 
 

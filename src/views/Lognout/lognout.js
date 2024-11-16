@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Hook điều hướng của React Router
 import { toast } from 'react-toastify'; // Để hiển thị thông báo toast
+import Header from '../heater/heater';
 
 const Logout = () => {
     const navigate = useNavigate(); // Để điều hướng người dùng
@@ -22,9 +23,12 @@ const Logout = () => {
     };
 
     return (
-        <div className="logout-container">
-            <button style={{ border: '1px solid grey' }} type='button ' onClick={handleLogout}>Đăng xuất</button>
-        </div>
+        <>
+            <Header />
+            <div className="logout-container">
+                <button style={{ border: '1px solid grey' }} type='button ' onClick={handleLogout}>Đăng xuất</button>
+            </div>
+        </>
     );
 };
 

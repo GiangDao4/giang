@@ -11,6 +11,7 @@ import ListCar from './Todos/ListCar';
 import Document from './Documents/Document';
 import CarList from './heater/carlist';
 import CarDetail from './Todos/cardetails';
+import Logout from './Lognout/lognout';
 
 function App() {
   // Kiểm tra xem người dùng đã đăng nhập hay chưa
@@ -25,6 +26,7 @@ function App() {
             {/* Route mặc định chuyển đến trang login */}
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/cardetail/:id" element={<CarDetail />} />
+            <Route path="/out" element={<Logout />} />
 
             {/* Bỏ qua kiểm tra xác thực, luôn chuyển đến trang AdminDashboard */}
             <Route path="/admin" element={<AdminDashboard />}>
