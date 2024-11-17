@@ -126,7 +126,8 @@ const ListUser = () => {
         <div className="list-user-container">
             <div style={{ display: 'flex', marginLeft: '80px' }}>
                 <div className="title">Danh sách người dùng</div>
-                <div style={{ marginLeft: '400px' }}>Trạng thái</div>
+                {/* t bỏ đi chữ trạng thái */}
+                <div style={{ marginLeft: '400px' }}></div>
             </div>
 
             <div className="list-user-content">

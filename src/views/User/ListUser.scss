@@ -1,164 +1,285 @@
-.list-user-container{
+// .list-user-container{
+//     display: block;
+//     .list-user-content{
+//         // .child{
+//         //     width: 400px;
+//         //     margin: 0 auto;
+//         //     height: 30px;
+//         //     border: 1px solid grey;
+//         //     cursor: pointer;  
+
+//         // }
+//     }
+//     .list-user-container {
+//         padding: 20px;
+//     }
+
+//     .title {
+//         font-size: 20px;
+//         font-weight: bold;
+//         margin-bottom: 20px;
+//     }
+
+//     .list-user-content {
+//         // max-height: 400px;
+//         overflow-y: auto;
+//     }
+
+//     .child {
+//         border-bottom: 1px  solid #ddd;
+//         padding: 10px;
+//         margin: 5px 0px;
+//         display: flex;  // Dùng flexbox để căn chỉnh các phần tử
+//         justify-content: space-between;  // Căn đều các phần tử giữa
+//         transition: background-color 0.3s ease;
+//         border-radius: 5px;
+//         font-size: 18px;
+//        // background-color:#f5f5f5;  // Màu nền nhẹ cho các mục
+//     }
+//     .user-info {
+//         margin-left: 70px;
+//         display: flex;  // Flexbox để căn chỉnh tên người dùng và trạng thái
+//         justify-content: space-between;
+//         width: 100%;  // Đảm bảo các phần tử chiếm đủ không gian ngang
+//         align-items: center;
+//     }
+
+//     .status {
+//         padding: 2px 6px;
+//         border-radius: 4px;
+//         font-weight: bold;
+//     }
+
+//     .status.online {
+//         font-size: 14px;
+//         margin-left:380px;
+//         margin-right: 30px;
+
+//         background-color: #007bff;  // Màu xanh cho trạng thái online
+//         color: white;
+//     }
+
+//     .status.offline {
+//         font-size: 14px;
+//         margin-left:380px;
+//         margin-right: 30px;
+
+//         background-color: #f44336;  // Màu đỏ cho trạng thái offline
+//         color: white;
+//     }
+//     .list-ud {
+//         display: flex;  /* Sắp xếp các nút theo hàng ngang */
+//         gap: 10px;      /* Khoảng cách giữa các nút */
+//         align-items: center;  /* Căn chỉnh các nút theo chiều dọc */
+//         padding: 10px;   /* Thêm một chút khoảng đệm xung quanh */
+//     }
+
+//     /* Nút chung cho cả "Sửa" và "Xóa" */
+//     .list-ud button {
+//         padding: 7px 14px; /* Thêm padding cho nút */
+//         font-size: 12px;   /* Kích thước chữ */
+//         border: none;      /* Xóa đường viền mặc định */
+//         border-radius: 5px; /* Bo góc nút */
+//         cursor: pointer;   /* Con trỏ chuột sẽ thay đổi khi hover */
+//         transition: background-color 0.3s ease, transform 0.3s ease; /* Thêm hiệu ứng chuyển động mượt mà khi hover */
+//     }
+
+//     /* Nút "Sửa" */
+//     .list-ud button.edit {
+//         background-color: #293d96;  /* Màu nền xanh cho nút "Sửa" */
+//         color: white;              /* Màu chữ trắng */
+//     }
+
+//     /* Nút "Xóa" */
+//     .list-ud button.delete {
+//         background-color: #f44336;  /* Màu nền đỏ cho nút "Xóa" */
+//         color: white;              /* Màu chữ trắng */
+//     }
+
+//     /* Hiệu ứng hover khi di chuột vào nút */
+//     .list-ud button:hover {
+//         transform: scale(1.05);   /* Tăng kích thước một chút khi hover */
+//     }
+
+//     /* Hiệu ứng khi di chuột vào nút "Sửa" */
+//     .list-ud button.edit:hover {
+//         background-color: #293d96;  /* Tối màu khi hover trên nút "Sửa" */
+//     }
+
+//     /* Hiệu ứng khi di chuột vào nút "Xóa" */
+//     .list-ud button.delete:hover {
+//         background-color: #e53935;  /* Tối màu khi hover trên nút "Xóa" */
+//     }
+
+//     /* Hiệu ứng focus (khi người dùng nhấn vào nút) */
+//     .list-ud button:focus {
+//         outline: none;           /* Bỏ outline mặc định */
+//         box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Thêm shadow cho nút khi được nhấn */
+//     }
+//     .pagination {
+//         margin-top: 20px;
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//     }
+
+//     .pagination-buttons {
+//         display: flex;
+//         gap: 10px;
+//     }
+
+//     .page-button {
+//         padding: 4px 10px;
+//         font-size: 8px;
+//         border: 1px solid #ddd;
+//        // background-color: #f4f4f4;
+//         border-radius: 5px;
+//         cursor: pointer;
+//        // transition: background-color 0.3s ease;
+//     }
+
+//     .page-button:hover {
+//         background-color: #e0e0e0;
+//     }
+
+//     .page-button.active {
+//         //background-color: #4CAF50;
+//         color: black;
+//         font-weight: bold;
+//     }
+
+//     .page-button:disabled {
+//       //  background-color: #ddd;
+//         cursor: not-allowed;
+//     }
+
+//     .ellipsis {
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         padding: 0 5px;
+//     }
+
+
+// }
+
+.list-user-container {
     display: block;
-    .list-user-content{
-        // .child{
-        //     width: 400px;
-        //     margin: 0 auto;
-        //     height: 30px;
-        //     border: 1px solid grey;
-        //     cursor: pointer;  
-          
-        // }
-    }
-    .list-user-container {
-        padding: 20px;
-    }
-    
+    padding: 20px;
+
     .title {
         font-size: 20px;
         font-weight: bold;
         margin-bottom: 20px;
     }
-    
+
     .list-user-content {
-        // max-height: 400px;
         overflow-y: auto;
     }
-    
+
     .child {
-        border-bottom: 1px  solid #ddd;
+        border-bottom: 1px solid #ddd;
         padding: 10px;
-        margin: 5px 0px;
-        display: flex;  // Dùng flexbox để căn chỉnh các phần tử
-        justify-content: space-between;  // Căn đều các phần tử giữa
-        transition: background-color 0.3s ease;
+        margin: 5px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         border-radius: 5px;
         font-size: 18px;
-       // background-color:#f5f5f5;  // Màu nền nhẹ cho các mục
+        transition: background-color 0.3s ease;
     }
+
     .user-info {
-        margin-left: 70px;
-        display: flex;  // Flexbox để căn chỉnh tên người dùng và trạng thái
-        justify-content: space-between;
-        width: 100%;  // Đảm bảo các phần tử chiếm đủ không gian ngang
+        display: flex;
         align-items: center;
     }
-    
+
+    /* Giới hạn độ dài của tên người dùng */
+    .user-info span:first-child {
+        display: flex;
+        width: 200px;
+        /* Chiều rộng cố định cho tên người dùng */
+        overflow: hidden;
+        /* Ẩn phần chữ dài hơn */
+        text-overflow: ellipsis;
+        /* Thêm dấu "..." nếu tên dài hơn chiều rộng */
+        white-space: nowrap;
+        /* Ngăn tên người dùng xuống dòng */
+        margin-right: 15px;
+        /* Khoảng cách giữa tên người dùng và trạng thái */
+    }
+
     .status {
         padding: 2px 6px;
         border-radius: 4px;
         font-weight: bold;
+        font-size: 14px;
     }
-    
+
     .status.online {
-        font-size: 14px;
-        margin-left:380px;
-        margin-right: 30px;
-     
-        background-color: #007bff;  // Màu xanh cho trạng thái online
+        background-color: #007bff;
         color: white;
     }
-    
+
     .status.offline {
-        font-size: 14px;
-        margin-left:380px;
-        margin-right: 30px;
-   
-        background-color: #f44336;  // Màu đỏ cho trạng thái offline
+        background-color: #f44336;
+        color: white;
+        font-size: 12px;
+    }
+
+    .list-ud {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .list-ud button {
+        padding: 7px 14px;
+        font-size: 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .list-ud button.delete {
+        background-color: #f44336;
         color: white;
     }
-    .list-ud {
-        display: flex;  /* Sắp xếp các nút theo hàng ngang */
-        gap: 10px;      /* Khoảng cách giữa các nút */
-        align-items: center;  /* Căn chỉnh các nút theo chiều dọc */
-        padding: 10px;   /* Thêm một chút khoảng đệm xung quanh */
-    }
-    
-    /* Nút chung cho cả "Sửa" và "Xóa" */
-    .list-ud button {
-        padding: 7px 14px; /* Thêm padding cho nút */
-        font-size: 12px;   /* Kích thước chữ */
-        border: none;      /* Xóa đường viền mặc định */
-        border-radius: 5px; /* Bo góc nút */
-        cursor: pointer;   /* Con trỏ chuột sẽ thay đổi khi hover */
-        transition: background-color 0.3s ease, transform 0.3s ease; /* Thêm hiệu ứng chuyển động mượt mà khi hover */
-    }
-    
-    /* Nút "Sửa" */
-    .list-ud button.edit {
-        background-color: #293d96;  /* Màu nền xanh cho nút "Sửa" */
-        color: white;              /* Màu chữ trắng */
-    }
-    
-    /* Nút "Xóa" */
-    .list-ud button.delete {
-        background-color: #f44336;  /* Màu nền đỏ cho nút "Xóa" */
-        color: white;              /* Màu chữ trắng */
-    }
-    
-    /* Hiệu ứng hover khi di chuột vào nút */
+
     .list-ud button:hover {
-        transform: scale(1.05);   /* Tăng kích thước một chút khi hover */
+        transform: scale(1.05);
     }
-    
-    /* Hiệu ứng khi di chuột vào nút "Sửa" */
-    .list-ud button.edit:hover {
-        background-color: #293d96;  /* Tối màu khi hover trên nút "Sửa" */
-    }
-    
-    /* Hiệu ứng khi di chuột vào nút "Xóa" */
-    .list-ud button.delete:hover {
-        background-color: #e53935;  /* Tối màu khi hover trên nút "Xóa" */
-    }
-    
-    /* Hiệu ứng focus (khi người dùng nhấn vào nút) */
-    .list-ud button:focus {
-        outline: none;           /* Bỏ outline mặc định */
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Thêm shadow cho nút khi được nhấn */
-    }
+
     .pagination {
         margin-top: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
     }
-    
+
     .pagination-buttons {
         display: flex;
         gap: 10px;
     }
-    
+
     .page-button {
         padding: 4px 10px;
         font-size: 8px;
         border: 1px solid #ddd;
-       // background-color: #f4f4f4;
         border-radius: 5px;
         cursor: pointer;
-       // transition: background-color 0.3s ease;
     }
-    
-    .page-button:hover {
-        background-color: #e0e0e0;
-    }
-    
+
     .page-button.active {
-        //background-color: #4CAF50;
-        color: black;
         font-weight: bold;
     }
-    
-    .page-button:disabled {
-      //  background-color: #ddd;
-        cursor: not-allowed;
-    }
-    
+
     .ellipsis {
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 0 5px;
     }
-    
-    
 }

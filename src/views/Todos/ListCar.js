@@ -153,7 +153,8 @@ const ListCar = () => {
         <div className="list-car-container">
             <div style={{ display: 'flex', marginLeft: '80px' }}>
                 <div className="title" style={{ marginLeft: '-70px' }}>Danh sách ô tô</div>
-                <div style={{ marginLeft: '600px' }}>Trạng thái</div>
+                {/* bỏ trạng thái */}
+                <div style={{ marginLeft: '350px' }}></div>
                 <div style={{ marginLeft: '200px' }}>
                     <button type="button" onClick={openAddCarForm}>Thêm mới xe</button>
                 </div>
@@ -172,18 +173,18 @@ const ListCar = () => {
                                 <div className="list-ud">
                                     <div>
 
-                                        <button type="button" onClick={() => handleDeleteCar(item.id)}>
+                                        <button class="btn btn-1" type="button" onClick={() => handleDeleteCar(item.id)}>
                                             Xóa
                                         </button>
                                     </div>
                                     <div>
-                                        <button type="button" onClick={() => handleEditCar(item.id)}>
+                                        <button class="btn btn-2" type="button" onClick={() => handleEditCar(item.id)}>
                                             Sửa
                                         </button>
                                     </div>
                                     <div> {/* Link đến trang chi tiết xe */}
                                         <Link to={`/cardetail/${item.id}`}>
-                                            <button>Chi Tiết</button>
+                                            <button class="btn btn-3">Chi Tiết</button>
                                         </Link></div>
                                 </div>
 

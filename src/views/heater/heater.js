@@ -71,7 +71,7 @@ const Header = () => {
             <div className="header">
                 <div className="logo">
                     <img src={logo} alt="Logo" className="logo-image" />
-                    <div className="logo-text">Hệ thống quản lý ô tô</div>
+                    <div className="logo-text">Dashboard</div>
                 </div>
 
                 <div className="search-container">

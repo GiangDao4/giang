@@ -1,18 +1,24 @@
 /* Header container */
 .header {
-  position: fixed; /* Fixed để giữ header luôn ở trên cùng */
+  position: fixed;
+  /* Fixed để giữ header luôn ở trên cùng */
   top: 0;
   left: 0;
-  height: 60px; /* Kích thước của header */
+  height: 60px;
+  /* Kích thước của header */
   width: 100%;
   padding: 10px 20px;
   background-color: #fff;
-  color: #333; /* Màu chữ đen sáng */
+  color: #333;
+  /* Màu chữ đen sáng */
   display: flex;
-  justify-content: space-between; /* Căn chỉnh các phần tử */
+  justify-content: space-between;
+  /* Căn chỉnh các phần tử */
   align-items: center;
-  z-index: 1000; /* Đảm bảo header ở trên cùng */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Thêm bóng cho header */
+  z-index: 1000;
+  /* Đảm bảo header ở trên cùng */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Thêm bóng cho header */
 }
 
 /* Logo */
@@ -28,17 +34,20 @@
 }
 
 .logo-text {
-  font-size: 20px;
+  font-size: 30px;
   font-weight: bold;
-  color: #333; /* Màu chữ đen sáng */
+  color: #333333;
+  /* Màu chữ đen sáng */
 }
 
 /* Phần tử tìm kiếm */
 .search-container {
   display: flex;
   align-items: center;
-  flex-grow: 1; /* Làm cho phần tử tìm kiếm chiếm hết không gian còn lại */
-  justify-content: center; /* Canh giữa phần tìm kiếm */
+  flex-grow: 1;
+  /* Làm cho phần tử tìm kiếm chiếm hết không gian còn lại */
+  justify-content: center;
+  /* Canh giữa phần tìm kiếm */
   margin-right: 20px;
 }
 
@@ -47,7 +56,8 @@
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 200px; /* Chiều rộng của ô tìm kiếm */
+  width: 200px;
+  /* Chiều rộng của ô tìm kiếm */
   font-size: 16px;
 }
 
@@ -83,34 +93,36 @@
 
 /* Style cho body nội dung chính khi có header */
 body {
-  margin-top: 70px; /* Đẩy nội dung xuống dưới header */
+  margin-top: 70px;
+  /* Đẩy nội dung xuống dưới header */
   font-family: Arial, sans-serif;
 }
 
 /* Responsive Design - Điều chỉnh cho màn hình nhỏ */
 @media (max-width: 768px) {
   .header {
-      flex-direction: column;
-      height: auto;
-      padding: 15px;
+    flex-direction: column;
+    height: auto;
+    padding: 15px;
   }
 
   .search-container {
-      width: 100%;
-      margin: 10px 0;
-      justify-content: space-between; /* Căn chỉnh tìm kiếm với nút đăng nhập */
+    width: 100%;
+    margin: 10px 0;
+    justify-content: space-between;
+    /* Căn chỉnh tìm kiếm với nút đăng nhập */
   }
 
   .search-container input {
-      width: 60%;
+    width: 60%;
   }
 
   .logo-text {
-      font-size: 18px;
+    font-size: 18px;
   }
 
   .login-button {
-      width: 100%;
-      margin-top: 10px;
+    width: 100%;
+    margin-top: 10px;
   }
 }
