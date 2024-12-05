@@ -24,7 +24,7 @@ const Login = () => {
         setLoading(true);  // Đang xử lý yêu cầu đăng nhập
 
         try {
-            // Gửi yêu cầu đăng nhập (thay đổi API url theo backend của bạn)
+            // Gửi yêu cầu đăng nhập 
             const response = await axios.post('http://localhost:8088/api/v1/users/login', {
                 phone_number,
                 password,

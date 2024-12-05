@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Header.scss'; // Import file SCSS
-import logo from '../../assets/images/car (1).png';
+import logo from '../../assets/images/anh.jpg';
+import logo1 from '../../assets/images/active.png';
+import logo2 from '../../assets/images/circle.png';
 
 const Header = () => {
     const [searchQuery, setSearchQuery] = useState("");  // State cho từ khóa tìm kiếm
@@ -84,6 +86,10 @@ const Header = () => {
                         className="search-input"
                     />
                     <button className="timkiem" onClick={handleSearchSubmit}>Tìm kiếm</button>
+                </div>
+                <div className="header-icons">
+                    <img src={logo1} alt="Icon 1" />
+                    <img src={logo2} alt="Icon 2" />
                 </div>
             </div>
         </div>

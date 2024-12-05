@@ -3,16 +3,23 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import './ListCar.scss';
 import { toast } from 'react-toastify';
+import AddCarForm from "./AddCarForm";
+import UpdateCarForm from "./updatecar";
+
 
 const ListCar = () => {
     const [listCar, setListCar] = useState([]);  // State lưu trữ danh sách ô tô
     const [currentPage, setCurrentPage] = useState(1);  // Trạng thái trang hiện tại
     const [totalPages, setTotalPages] = useState(1);  // Tổng số trang
-    const [carsPerPage] = useState(10);  // Số ô tô mỗi trang
+    const [carsPerPage] = useState(6);  // Số ô tô mỗi trang
     const [showAddCarForm, setShowAddCarForm] = useState(false);  // Trạng thái hiển thị form thêm xe
     const [newCar, setNewCar] = useState({ name: "", model: "", year: "", price: "" });  // Thông tin xe mới
-    const navigate = useNavigate();  // Hook điều hướng
+    const navigate = useNavigate();
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedCar, setSelectedCar] = useState(null);
+
+    const [carList, setCarList] = useState([]);
+
 
     // Hàm fetch dữ liệu ô tô từ API với phân trang
     const fetchCars = async (page) => {
@@ -46,7 +53,8 @@ const ListCar = () => {
             // Gửi yêu cầu xóa xe từ API
             const response = await axios.delete(`http://localhost:8088/api/v1/car/delete?id=${carId}`, {
                 headers: {
-                    Authorization: `Bearer ${token}`,  // Gửi token trong header
+                    Authorization: `Bearer ${token}`,
+                    'content-type': 'application/json',  // Gửi token trong header
                 }
             });
 
@@ -84,7 +92,6 @@ const ListCar = () => {
             setCurrentPage(currentPage - 1);
         }
     };
-
     // Hàm tạo các trang cho phân trang
     const createPageNumbers = () => {
         const pageNumbers = [];
@@ -104,27 +111,6 @@ const ListCar = () => {
         return pageNumbers;
     };
 
-    // Hàm thêm xe mới
-    const handleAddCar = async () => {
-        try {
-            // Gửi yêu cầu thêm xe mới đến API
-            const response = await axios.post(`http://localhost:8088/api/v1/car`, newCar, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('authToken')}`,  // Gửi token xác thực nếu cần
-                },
-            });
-
-            // Nếu thành công, hiển thị thông báo và cập nhật lại danh sách xe
-            toast.success("Thêm xe mới thành công!");
-            fetchCars(currentPage);
-            setShowAddCarForm(false);  // Đóng form thêm xe
-            setNewCar({ name: "", model: "", year: "", price: "" });  // Reset form
-        } catch (error) {
-            toast.error("Không thể thêm xe mới!");
-            console.error("Error adding car:", error);
-        }
-    };
-
     // Hàm mở form thêm xe mới
     const openAddCarForm = () => {
         setShowAddCarForm(true);  // Mở form thêm xe
@@ -135,31 +121,40 @@ const ListCar = () => {
         setShowAddCarForm(false);  // Đóng form thêm xe
     };
 
-    // Hàm thay đổi giá trị trong form nhập liệu
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewCar(prevState => ({
-            ...prevState,
-            [name]: value,
-        }));
+    // Hàm xử lý khi thêm xe thành công
+    const handleAddCarSuccess = (newCar) => {
+        // Cập nhật lại danh sách xe sau khi thêm thành công
+        setCarList((prevCars) => [...prevCars, newCar]);
+        alert('Xe đã được thêm thành công!');
+        setShowAddCarForm(false);
     };
-    const handleEditCar = () => {
+    // Hàm mở form chỉnh sửa
+    const openUpdateModal = (car) => {
+        setSelectedCar(car);
+        setIsModalOpen(true);
 
-    }
-    const handleViewDetails = () => {
+    };
 
-    }
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedCar(null);
+
+    };
+
+    const handleUpdateSuccess = () => {
+        fetchCars(currentPage);
+        closeModal();  // Close modal
+    };
     return (
         <div className="list-car-container">
             <div style={{ display: 'flex', marginLeft: '80px' }}>
                 <div className="title" style={{ marginLeft: '-70px' }}>Danh sách ô tô</div>
                 {/* bỏ trạng thái */}
                 <div style={{ marginLeft: '350px' }}></div>
-                <div style={{ marginLeft: '200px' }}>
+                <div style={{ marginLeft: '500px', height: '60px' }}>
                     <button type="button" onClick={openAddCarForm}>Thêm mới xe</button>
                 </div>
             </div>
-
             <div className="list-car-content">
                 {listCar && listCar.length > 0 &&
                     listCar.map((item, index) => {
@@ -178,7 +173,7 @@ const ListCar = () => {
                                         </button>
                                     </div>
                                     <div>
-                                        <button class="btn btn-2" type="button" onClick={() => handleEditCar(item.id)}>
+                                        <button onClick={() => openUpdateModal(item)}>
                                             Sửa
                                         </button>
                                     </div>
@@ -195,55 +190,25 @@ const ListCar = () => {
                 }
             </div>
 
-            {showAddCarForm && (
-                <div className="add-car-form">
-                    <h3>Thêm xe mới</h3>
-                    <div>
-                        <label>Tên xe:</label>
-                        <input
-                            type="text"
-                            name="name"
-                            value={newCar.name}
-                            onChange={handleInputChange}
-                            placeholder="Nhập tên xe"
-                        />
-                    </div>
-                    <div>
-                        <label>Model:</label>
-                        <input
-                            type="text"
-                            name="model"
-                            value={newCar.model}
-                            onChange={handleInputChange}
-                            placeholder="Nhập model xe"
-                        />
-                    </div>
-                    <div>
-                        <label>Year:</label>
-                        <input
-                            type="text"
-                            name="year"
-                            value={newCar.year}
-                            onChange={handleInputChange}
-                            placeholder="Nhập năm sản xuất"
-                        />
-                    </div>
-                    <div>
-                        <label>Price:</label>
-                        <input
-                            type="number"
-                            name="price"
-                            value={newCar.price}
-                            onChange={handleInputChange}
-                            placeholder="Nhập giá xe"
-                        />
-                    </div>
-                    <div>
-                        <button type="button" onClick={handleAddCar}>Thêm xe</button>
-                        <button type="button" onClick={handleCloseForm}>Hủy</button>
-                    </div>
-                </div>
-            )}
+            <div>
+
+
+                {/* Hiển thị form khi showAddCarForm là true */}
+                {showAddCarForm && (
+                    <AddCarForm
+                        onClose={handleCloseForm}      // Hàm đóng form
+                        onAddCarSuccess={handleAddCarSuccess}  // Hàm khi thêm xe thành công
+                    />
+                )}
+                {/* Modal for updating car */}
+                {isModalOpen && selectedCar && (
+                    <UpdateCarForm
+                        selectedCar={selectedCar}
+                        onClose={closeModal}
+                        onUpdateSuccess={handleUpdateSuccess}
+                    />
+                )}
+            </div>
 
             {/* Phân trang */}
             <div className="pagination">

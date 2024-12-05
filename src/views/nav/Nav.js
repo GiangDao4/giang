@@ -1,34 +1,11 @@
-// import React from "react";
-// import './Nav.scss';
-// import { Link } from "react-router-dom";
-
-// const Nav = () => {
-//     return (
-//         <div className="topnav">
-//             <Link to="/admin/a" className={({ isActive }) => (isActive ? "active" : "")}>Trang chủ</Link>
-//             <Link to="/admin/user" className={({ isActive }) => (isActive ? "active" : "")}>Người dùng</Link>
-//             <Link to="/admin/Todos" className={({ isActive }) => (isActive ? "active" : "")}>Ô tô</Link>
-//             <Link to="/admin/document" className={({ isActive }) => (isActive ? "active" : "")}>Tài liệu thêm</Link>
-//             <Link to="/out" className={({ isActive }) => (isActive ? "active" : "")}>Trang cá nhân</Link>
-//             {/* <Link to="/admin/carlist" className={({ isActive }) => (isActive ? "active" : "")}>carlist</Link> */}
-//             {/* <Link to="/admin/cardetail/:id" className={({ isActive }) => (isActive ? "active" : "")}>cardetail</Link>
-//             <button>djdjd</button> */}
-//         </div>
-//     );
-// };
-
-// export default Nav;
-
-
 import React, { useState } from "react";
-import './Nav.scss';
-import { Link, useLocation } from "react-router-dom";
+import "./Nav.scss";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
-    const [activeLink, setActiveLink] = useState(null);
-    const location = useLocation(); // Dùng để lấy đường dẫn hiện tại
+    const [activeLink, setActiveLink] = useState("/admin/a");
 
-    // Cập nhật trạng thái active khi click vào một liên kết
+    // Cập nhật trạng thái active khi click
     const handleLinkClick = (path) => {
         setActiveLink(path);
     };
@@ -40,7 +17,7 @@ const Nav = () => {
                 className={activeLink === "/admin/a" ? "active" : ""}
                 onClick={() => handleLinkClick("/admin/a")}
             >
-                Trang chủ
+                Bảng điều khiển
             </Link>
             <Link
                 to="/admin/user"

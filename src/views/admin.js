@@ -19,7 +19,7 @@ const AdminDashboard = () => {
     return (
         <div className="admin-dashboard">
             <Header />
-            <Nav />
+            <Nav/>
             <div className="routes-container">
                 <Routes>
                     <Route path="/a" element={<Home />} />

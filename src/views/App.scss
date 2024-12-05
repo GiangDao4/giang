@@ -2,9 +2,9 @@
   text-align: center;
   position: relative; /* Để dễ dàng điều chỉnh vị trí các thành phần bên trong */
   margin-top: 70px;
-  margin-left: 0; /* Điều chỉnh margin để phù hợp với cấu trúc layout */
+   /* Điều chỉnh margin để phù hợp với cấu trúc layout */
   max-width: 100%; /* Giới hạn kích thước tối đa */
- padding: 20px;
+   padding-top: 20px;
 }
 
 .App-logo {
@@ -18,7 +18,7 @@
 }
 
 .App-header {
-  background-color: #e4e5e7;// #282c34;
+  //background-color: #e4e5e7;// #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -29,6 +29,7 @@
   text-align: center; /* Đảm bảo nội dung được căn giữa */
   margin-right: -50px;
   margin-top: -20px;
+  width: 100%;
 }
 
 .App-header h1 {
